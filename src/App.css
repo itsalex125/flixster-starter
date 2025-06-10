@@ -11,18 +11,72 @@
   color: white;
   padding: 20px;
 }
+.search-bar{
+  display: flex;
+  gap: 10px;
+}
+
+.search-bar form{
+  display: flex;
+}
 
 @media (max-width: 600px) {
-  .movie-card {
-    width: 100%;
-  }
-
   .search-bar {
     flex-direction: column;
-    gap: 10px;
   }
 
   .search-bar form {
     flex-direction: column;
   }
+  .App-header{
+    flex-direction: column;
+    gap: 10px;
+  }
 }
+    .movie-card {
+    background-color: white;
+    padding: 16px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .movie-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    padding: 32px;
+  }
+  .movie-title{
+    font-weight: bold;
+    border-radius: 6px;
+  }
+  .movie-card img{
+    width: 100%;
+    border-radius:6px;
+  }
+
+  .movie-rating{
+    font-size: 15px;
+    color: lightslategray;
+  }
+  footer{
+    text-align:center;
+    padding: 16px;
+    font-size: 14px;
+    color: lightslategray;
+    background-color: white;
+    border-top: 1px solid black;
+  }
+
+  .search-bar button{
+    padding: 8px 16px;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  .load-more{
+    margin: 32px auto;
+    padding: 12px 32px;
+    display: block;
+    background-color: #282c34;
+    color: white;
+    border-radius: 8px;
+  }
