@@ -13,6 +13,8 @@ export default function MovieList(){
     const[selectedMovie, setSelectedMovie] = useState(null);
     const[isModalOpen, setIsModalOpen] = useState(false);
     const[sortOptions, setSortOptions] = useState("Title");
+    const[isWatched, setIsWatched] = useState(new Set());
+    const[isLiked, setIsLiked] = useState(new Set());
     
     useEffect(()=>{
         fetchNowPlaying(1);
@@ -104,19 +106,35 @@ const handleSearchChange = (event) => {
 };
 
 
-const safeMovies = Array.isArray(movies) ? [...movies] : [];
+const saveMovies = Array.isArray(movies) ? [...movies] : [];
 
 if(sortOptions === "title"){
-    safeMovies.sort((a,b) => a.title.localeCompare(b.title));
+    saveMovies.sort((a,b) => a.title.localeCompare(b.title));
 }
 else if(sortOptions === "rating"){
-    safeMovies.sort((a,b) => b.vote_average - a.vote_average);
+    saveMovies.sort((a,b) => b.vote_average - a.vote_average);
 }
 else if(sortOptions === "date"){
-    safeMovies.sort((a,b) =>{
+    saveMovies.sort((a,b) =>{
         return new Date(b.release_date) - new Date(a.release_date);
     });
 }
+
+const onToggleLiked = (movieId) =>{
+    setIsLiked((prev)=>{
+        const newSet = new Set(prev)
+        newSet.has(movieId) ? newSet.delete(movieId) : newSet.add(movieId);
+        return newSet;
+    });
+};
+
+const onToggleWatched = (movieId) =>{
+    setIsWatched((prev)=>{
+        const newSet = new Set(prev)
+        newSet.has(movieId) ? newSet.delete(movieId) : newSet.add(movieId);
+        return newSet;
+    });
+};
 
     return(
     <div>
@@ -135,11 +153,19 @@ else if(sortOptions === "date"){
             )}
         </form>
         <main className = "movie-list">
-            {safeMovies.length === 0 ? (
+            {saveMovies.length === 0 ? (
                 <p>No results found.</p>
             ) : (
-                safeMovies.map((movie)=> <MovieCard key = {movie.id} movie = {movie} onImageClick={()=>handleModalOpen(movie.id)}/> )
-            )}
+                saveMovies.map((movie)=> <MovieCard 
+                key = {movie.id} 
+                movie = {movie} 
+                isLiked={isLiked.has(movie.id)}
+                isWatched={isWatched.has(movie.id)}
+                onImageClick={()=>handleModalOpen(movie.id)} 
+                toggleWatched = {()=>onToggleWatched(movie.id)} 
+                toggleLiked={()=>onToggleLiked(movie.id)}
+                /> )
+            )}                
         </main>
         {page < totalPage && (
             <button className = "load-more" onClick={handleLoadMore}>
