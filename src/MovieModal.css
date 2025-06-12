@@ -4,11 +4,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: 0 0 20px rgba(0,0,0,0.75);
+    background-color: rgba(0,0,0,0.4);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1;
 }
 .modal-box{
     background: white;
@@ -18,7 +18,7 @@
     max-width: 600px;
     text-align: center;
     position: relative;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    box-shadow:rgba(0,0,0,0.4);
 }
 .modal-title{
     font-size: 28px;

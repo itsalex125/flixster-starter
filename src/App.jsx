@@ -6,16 +6,10 @@ const App = () => {
   return (
     <div className="App">
       <header className="app-header">
-        <h1>Flixster</h1>
-          {/* <select>
-            <option>Sort by</option>
-            <option>Rating: Descending</option>
-            <option>Popularity: Descending</option>
-            <option>Release Date: Descending</option>
-          </select> */}
+        <h1> 🎥Flixster</h1>
       </header>
       <MovieList />
-      <footer>2025 Flixster</footer>
+      <footer> ©2025 Flixster</footer>
     </div>
   )
 }

@@ -11,10 +11,26 @@ export default function MovieList(){
     const [isSearching, setIsSearching] = useState(false);
     const[totalPage, setTotalPages] = useState(1);
     const[selectedMovie, setSelectedMovie] = useState(null);
-
+    const[isModalOpen, setIsModalOpen] = useState(false);
+    const[sortOptions, setSortOptions] = useState("Title");
+    
     useEffect(()=>{
         fetchNowPlaying(1);
     }, []);
+    
+    const handleSortChange = (e)=>{
+        setSortOptions(e.target.value)
+    };
+
+    const handleModalOpen = async (movieId) => {
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`);
+        const data = await response.json();
+        setSelectedMovie(data);
+        setIsModalOpen(true);
+    };
+    const handleModalClose = () => {
+        setIsModalOpen(false);   
+    }
 
     const fetchNowPlaying = async (pageNumber) => {
             const response = await fetch(
@@ -86,16 +102,29 @@ const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
 };
 
-const handleMovieClick = async (movieId) => {
-    const response = await fetch(`https://api.themoviedb.org/3/now-playing/${movieId}?api_key=${API_KEY}`);
-    const data = await response.json();
-    setSelectedMovie(data);
-};
 
-const safeMovies = Array.isArray(movies) ? movies : [];
+let safeMovies = Array.isArray(movies) ? [...movies] : [];
+
+if(sortOptions === "title"){
+    safeMovies.sort((a,b) => a.title.localeCompare(b.title));
+}
+else if(sortOptions === "rating"){
+    safeMovies.sort((a,b) => b.vote_average - a.vote_average);
+}
+else if(sortOptions === "date"){
+    safeMovies.sort((a,b) =>{
+        return new Date(b.release_date) - new Date(a.release_date);
+    });
+}
 
     return(
     <div>
+        <select value={sortOptions} onChange={handleSortChange}>
+            <option value ="intial">Sort by</option>
+            <option value="title">Title (A-Z)</option>
+            <option value="rating">Popularity: descending</option>
+            <option value="date">Release: descending</option>
+        </select>
         <form className = "search-bar" onSubmit={handleSearch}>
             <input type="text" placeholder = "Looking for..." value ={searchQuery} 
             onChange={handleSearchChange} />
@@ -108,7 +137,7 @@ const safeMovies = Array.isArray(movies) ? movies : [];
             {safeMovies.length === 0 ? (
                 <p>No results found.</p>
             ) : (
-                safeMovies.map((movie)=> <MovieCard key = {movie.id} movie = {movie} onClick={handleMovieClick}/> )
+                safeMovies.map((movie)=> <MovieCard key = {movie.id} movie = {movie} onImageClick={()=>handleModalOpen(movie.id)}/> )
             )}
         </main>
         {page < totalPage && (
@@ -117,7 +146,7 @@ const safeMovies = Array.isArray(movies) ? movies : [];
             </button>
         )}
         {selectedMovie && (
-        <MovieModal movie={selectedMovie} onClose={()=>setSelectedMovie(null)} />
+        <MovieModal movie={selectedMovie} onClose={handleModalClose} onOpen={isModalOpen} />
         )}
     </div>    
     );
