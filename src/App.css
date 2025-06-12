@@ -17,7 +17,7 @@
 }
 h1{
   margin: 0;
-  height: 50px;
+  height: 100px;
   background-color: azure;
   display: flex;
   justify-content: center;
@@ -28,7 +28,7 @@ h1{
 }
 
 @media (max-width: 600px) {
-  .search-bar {
+  .search-bar {    
     flex-direction: column;
   }
 
@@ -94,3 +94,18 @@ h1{
     color: white;
     border-radius: 8px;
   }
+
+.search-bar{
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+select{
+  margin: 10px;
+}
+
+button{
+  margin: 10px;
+}

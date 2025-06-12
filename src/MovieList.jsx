@@ -69,14 +69,13 @@ const fetchSearchResults = async (query, pageNumber) => {
             
             setPage(pageNumber);
             setTotalPages(data.total_pages);
-            setIsSearching(true);
 };
 
 const handleLoadMore = () => {
     const nextPage = page + 1;
 
     if(nextPage <= totalPage){
-        if(isSearching){
+        if(searchQuery.trim() !== ""){
             fetchSearchResults(searchQuery, nextPage);
         }else{
             fetchNowPlaying(nextPage);
@@ -88,6 +87,7 @@ const handleSearch = async (e) => {
     e.preventDefault();
     if(!searchQuery.trim()) return;
 
+    setIsSearching(true);
     await fetchSearchResults(searchQuery.trim(), 1);
 };
 
@@ -95,6 +95,7 @@ const handleBack = async() => {
     setSearchQuery("");
     setPage(1);
     setTotalPages(1);
+    setIsSearching(false);
     await fetchNowPlaying(1);
 };
 
@@ -103,7 +104,7 @@ const handleSearchChange = (event) => {
 };
 
 
-let safeMovies = Array.isArray(movies) ? [...movies] : [];
+const safeMovies = Array.isArray(movies) ? [...movies] : [];
 
 if(sortOptions === "title"){
     safeMovies.sort((a,b) => a.title.localeCompare(b.title));
@@ -120,7 +121,7 @@ else if(sortOptions === "date"){
     return(
     <div>
         <select value={sortOptions} onChange={handleSortChange}>
-            <option value ="intial">Sort by</option>
+            <option>Sort by</option>
             <option value="title">Title (A-Z)</option>
             <option value="rating">Popularity: descending</option>
             <option value="date">Release: descending</option>
@@ -130,7 +131,7 @@ else if(sortOptions === "date"){
             onChange={handleSearchChange} />
             <button type="submit">Search</button>
             {isSearching && (
-                <button type="button" onClick = {handleBack}>clear</button>
+                <button type="button" onClick = {handleBack}>Clear</button>
             )}
         </form>
         <main className = "movie-list">
