@@ -26,9 +26,18 @@ export default function MovieList(){
     };
 
     const handleModalOpen = async (movieId) => {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`);
-        const data = await response.json();
-        setSelectedMovie(data);
+        const movieResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`);
+        const movieData = await movieResponse.json();
+
+        const trailerResponse= await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`);
+        const trailerData = await trailerResponse.json();
+
+        const trailer = trailerData.results?.find(video => video.type === "Trailer" && video.site === "YouTube");
+
+        setSelectedMovie({
+            ...movieData,
+            trailer: trailer ? trailer.key : null
+        });
         setIsModalOpen(true);
     };
     const handleModalClose = () => {
@@ -155,21 +164,14 @@ const onToggleWatched = (movieId) =>{
                 <button type="button" onClick = {handleBack}>Clear</button>
             )}
         </form>
-        <main className = "movie-list">
-            {saveMovies.length === 0 ? (
-                <p>No results found.</p>
-            ) : (
-                saveMovies.map((movie)=> <MovieCard 
-                key = {movie.id} 
-                movie = {movie} 
-                isLiked={isLiked.has(movie.id)}
-                isWatched={isWatched.has(movie.id)}
-                onImageClick={()=>handleModalOpen(movie.id)} 
-                toggleWatched = {()=>onToggleWatched(movie.id)} 
-                toggleLiked={()=>onToggleLiked(movie.id)}
-                /> )
-            )}                
-        </main>
+        <SideBar
+            movies={saveMovies}
+            likedMovies={isLiked}
+            watchedMovies = {isWatched}
+            onImageClick={handleModalOpen}
+            toggleLiked={onToggleLiked}
+            toggleWatched={onToggleWatched}
+            />
         {page < totalPage && (
             <button className = "load-more" onClick={handleLoadMore}>
                 Load More
