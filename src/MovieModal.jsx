@@ -25,6 +25,7 @@ function MovieModal({movie, onClose, onOpen, movieId}){
                             width = "100%"
                             height ="315"
                             src={`https://www.youtube.com/embed/${movie.trailer}`}
+                            alt={`${movie.title} Trailer`}
                             title="Movie Trailer"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen>
