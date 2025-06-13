@@ -2,7 +2,7 @@
 
 Submitted by: Alexander Reyes-Paredes
 
-Estimated time spent: 20
+Estimated time spent: 20 hours
 
 Deployed Application (**required**): [Flixster Deployed Site](https://flixster-starter-4wvh.onrender.com)
 
