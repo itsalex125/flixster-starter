@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import MovieCard from "./MovieCard";
 import MovieModal from "./MovieModal";
+import SideBar from "./SideBar";
 
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
@@ -136,8 +137,10 @@ const onToggleWatched = (movieId) =>{
     });
 };
 
+
+
     return(
-    <div>
+    <div> 
         <select value={sortOptions} onChange={handleSortChange}>
             <option>Sort by</option>
             <option value="title">Title (A-Z)</option>

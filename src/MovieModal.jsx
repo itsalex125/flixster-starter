@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useState, useEffect}  from "react";
 import "./MovieModal.css";
 
-function MovieModal({movie, onClose, onOpen}){
+const API_KEY = import.meta.env.VITE_APP_API_KEY;
+
+function MovieModal({movie, onClose, onOpen, movieId}){
     if(!onOpen){
         return null;
     } 
