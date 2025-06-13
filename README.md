@@ -122,4 +122,4 @@ I used stack overflow.
 
 ### Shout out
 
-Shout-out to tom and the other tech peers that helped me when I had questions.
+Shout-out to Tom and the other tech peers that helped me when I had questions.
