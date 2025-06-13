@@ -99,10 +99,10 @@ Deployed Application (**required**): [Flixster Deployed Site](https://flixster-s
 
 ### Walkthrough Video
 
-`<div style="position: relative; padding-bottom: 56.25%; height: 0;">
+<div style="position: relative; padding-bottom: 56.25%; height: 0;">
 <iframe src="https://www.loom.com/embed/9b48a60f191f42c79794f313c5f62f99?sid=52c65c48-61a1-44bc-b5ec-1f3af86a457e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
 </iframe>
-</div>`
+</div>
 
 ### Reflection
 
