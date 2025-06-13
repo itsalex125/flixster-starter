@@ -120,7 +120,8 @@ I would have liked to something similar to the last project like a featured/most
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-I did not have the chance to demo, 
+I did not have the chance to demo.
+
 ### Open-source libraries used
 
 I used stack overflow.
