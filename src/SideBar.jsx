@@ -32,7 +32,7 @@ export default function SideBar({movies, likedMovies, watchedMovies, onImageClic
                     👀 Watched
                 </button>
             </div>
-            <div className="movie-list">
+            <div className="movie-list-container">
                 {renderMovies().length === 0 ? (
                     <p className="no-movies">No movies to show</p>
                 ) : (

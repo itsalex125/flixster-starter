@@ -1,0 +1,28 @@
+.sidebar{
+    position: fixed;
+    top:80px;
+    left: 0;
+    width: 100px;
+    height: 400px;
+    background-color: blanchedalmond;
+    display: flex;
+    flex-direction: column;
+    z-index: 90;
+}
+
+.sidebar-tabs {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    left:0;
+    top:80;
+    width: 90px;
+}
+
+.tab-button{
+    width: 90%;
+    padding: 12px 20px;
+    font-size: 12px;
+    text-align: left;
+}

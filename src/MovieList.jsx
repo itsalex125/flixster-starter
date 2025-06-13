@@ -118,16 +118,19 @@ const handleSearchChange = (event) => {
 
 const saveMovies = Array.isArray(movies) ? [...movies] : [];
 
-if(sortOptions === "title"){
-    saveMovies.sort((a,b) => a.title.localeCompare(b.title));
-}
-else if(sortOptions === "rating"){
-    saveMovies.sort((a,b) => b.vote_average - a.vote_average);
-}
-else if(sortOptions === "date"){
-    saveMovies.sort((a,b) =>{
-        return new Date(b.release_date) - new Date(a.release_date);
-    });
+switch(sortOptions){
+    case "title":
+        saveMovies.sort((a,b) => a.title.localeCompare(b.title));
+        break;
+    case "rating":
+        saveMovies.sort((a,b) => b.vote_average - a.vote_average);
+        break;
+    case "date":
+        saveMovies.sort((a,b) => Date(b.release_date) - new Date(a.release_date));
+        break;
+    default:
+        break;
+    
 }
 
 const onToggleLiked = (movieId) =>{
@@ -172,7 +175,7 @@ const onToggleWatched = (movieId) =>{
             toggleLiked={onToggleLiked}
             toggleWatched={onToggleWatched}
             />
-        {page < totalPage && (
+        {page < totalPage && !isSearching&&(
             <button className = "load-more" onClick={handleLoadMore}>
                 Load More
             </button>
