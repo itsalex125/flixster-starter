@@ -3,7 +3,7 @@ import "./MovieModal.css";
 
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
-function MovieModal({movie, onClose, onOpen, movieId}){
+function MovieModal({movie, onClose, onOpen}){
     if(!onOpen){
         return null;
     } 
